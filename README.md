@@ -17,7 +17,7 @@ Technologies used for this project:
 
 #### Frontend
 
-<img src="ttps://cdn.jsdelivr.net/gh/devicons/devicon/icons/vuejs/vuejs-original.svg" height="16" width="16" /> &nbsp; &nbsp; ReactJS
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vuejs/vuejs-original.svg" height="16" width="16" /> &nbsp; &nbsp; Vue
 
 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg" height="16" width="16" /> &nbsp; &nbsp; Bootstrap
 
