@@ -13,7 +13,10 @@
   },
   "dependencies": {
     "axios": "^1.4.0",
+    "bootstrap": "^5.2.3",
+    "jquery": "^3.7.0",
     "pinia": "^2.0.35",
+    "popper.js": "^1.16.1",
     "vue": "^3.2.47"
   },
   "devDependencies": {
