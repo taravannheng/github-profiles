@@ -1,6 +1,6 @@
 <template>
-  <header class="header d-flex justify-content-center align-items-center">
-    <h1 class="header__text">{{ text }}</h1>
+  <header class="header d-flex justify-content-center align-items-center" :style="headerStyle">
+    <h1 class="header__text" :style="headerTextStyle">{{ text }}</h1>
   </header>
 </template>
 
@@ -11,7 +11,15 @@ export default {
     text: {
       type: String,
       required: true
-    }
+    },
+    headerStyle: {
+      type: Object,
+      required: false
+    },
+    headerTextStyle: {
+      type: Object,
+      required: false
+    },
   }
 };
 </script>
