@@ -1,46 +1,28 @@
-# github-profiles
 
-This template should help get you started developing with Vue 3 in Vite.
+# GITHUB PROFILES
 
-## Recommended IDE Setup
+A project for searching for GitHub users and display basic information.
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+## Functionalities
 
-## Type Support for `.vue` Imports in TS
+Functionalities include:
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin) to make the TypeScript language service aware of `.vue` types.
+1. Search for GitHub users
+2. Suggestions on available users
+3. Profiles displaying information includes: number of followers and following, full name, email and latest repository.
 
-If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has also implemented a [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669) that is more performant. You can enable it by the following steps:
+## Technologies
 
-1. Disable the built-in TypeScript Extension
-    1) Run `Extensions: Show Built-in Extensions` from VSCode's command palette
-    2) Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
-2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
+Technologies used for this project:
 
-## Customize configuration
+#### Frontend
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+<img src="ttps://cdn.jsdelivr.net/gh/devicons/devicon/icons/vuejs/vuejs-original.svg" height="16" width="16" /> &nbsp; &nbsp; ReactJS
 
-## Project Setup
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg" height="16" width="16" /> &nbsp; &nbsp; Bootstrap
 
-```sh
-npm install
-```
+#### Formatting and Linting
 
-### Compile and Hot-Reload for Development
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/eslint/eslint-original.svg" height="16" width="16" /> &nbsp; &nbsp; ESLint
 
-```sh
-npm run dev
-```
-
-### Type-Check, Compile and Minify for Production
-
-```sh
-npm run build
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
-```
+<img src="https://cdn.cdnlogo.com/logos/p/5/prettier.svg" height="16" width="16" /> &nbsp; &nbsp; Prettier
