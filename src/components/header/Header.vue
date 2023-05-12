@@ -1,6 +1,6 @@
 <template>
-  <header class="header d-flex justify-content-center align-items-center" :style="headerStyle">
-    <h1 class="header__text" :style="headerTextStyle">{{ text }}</h1>
+  <header class="header d-flex justify-content-center align-items-center" :style="`${headerStyle}`">
+    <h1 class="header__text" :style="`${headerTextStyle}`">{{ text }}</h1>
   </header>
 </template>
 

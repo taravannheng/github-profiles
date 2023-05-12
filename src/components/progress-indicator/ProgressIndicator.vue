@@ -1,10 +1,10 @@
 <template>
   <div class="progress-indicator d-flex justify-content-center align-items-center flex-column"
-    :style="progressIndicatorStyle">
+    :style="`${progressIndicatorStyle}`">
     <img src="../../assets/images/invertocat.png" alt="invertocat" class="progress-indicator__logo"
-      :class="{ 'rotate': isLoading }" :style="progressIndicatorLogoStyle">
-    <p class="progress-indicator__text-container" :style="progressIndicatorTextContainerStyle"><span
-        class="progress-indicator__text" :style="progressIndicatorTextStyle">{{ isLoading ? 'Searching...' : loadingText
+      :class="{ 'rotate': isLoading }" :style="`${progressIndicatorLogoStyle}`">
+    <p class="progress-indicator__text-container" :style="`${progressIndicatorTextContainerStyle}`"><span
+        class="progress-indicator__text" :style="`${progressIndicatorTextStyle}`">{{ isLoading ? 'Searching...' : loadingText
         }}</span></p>
   </div>
 </template>
