@@ -3,6 +3,9 @@
 
 A project for searching for GitHub users and display basic information.
 
+check out the design on [Dribbble](https://dribbble.com/shots/21440950-GITHUB-PROFILES)
+
+
 ## Functionalities
 
 Functionalities include:
