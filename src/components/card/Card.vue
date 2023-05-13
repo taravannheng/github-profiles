@@ -98,6 +98,10 @@ export default {
 
     &.default {
       background-color: map-get($colors, light-primary);
+
+      &:hover {
+        background-color: map-get($colors, dark-primary);
+      }
     }
 
     &.error {
