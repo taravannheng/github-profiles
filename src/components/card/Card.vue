@@ -44,7 +44,8 @@ export default {
   border-radius: 0;
   background-color: map-get($colors, medium-primary);
   color: map-get($colors, lightest);
-  overflow: hidden;
+  overflow-x: scroll;
+  overflow-y: hidden;
 
   &__text {
     width: clamp(100%, 100%, 100%);
