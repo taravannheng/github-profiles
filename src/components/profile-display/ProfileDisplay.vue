@@ -37,7 +37,7 @@ export default {
 @import '@/assets/scss/main.scss';
 
 .profile-display {
-
+  padding-top: 36px;
   margin-left: 24px;
   margin-right: 24px;
 

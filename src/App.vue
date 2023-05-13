@@ -34,7 +34,7 @@ export default {
   data() {
     return {
       isSearchBoxFocus: false,
-      displayStyle: 'margin-top: 52px; max-width: 100%;' as string,
+      displayStyle: 'max-width: 100%;' as string,
       searchValue: '' as string,
       submitValue: '' as string,
       displayState: "default" as string,
@@ -53,7 +53,7 @@ export default {
       this.submitHandler(this.submitValue);
     },
     getDisplayStyle() {
-      return this.displayState === 'profile' ? 'margin-top: 52px; max-width: 382px;' : 'margin-top: 52px; max-width: 100%;';
+      return this.displayState === 'profile' ? 'max-width: 382px;' : 'max-width: 100%;';
     },
     delayUpdateDisplayState(state: string) {
       setTimeout(() => {
@@ -173,10 +173,10 @@ export default {
     <Header text="GitHub Profiles"></Header>
     <Display :state="displayState" :suggestion-data="suggestionData" :profile-display-data="profileDisplayData"
       :style="this.displayStyle" :clicked-card-content="clickedCardContent"
-      @update:clicked-card-content="clickedCardHandler" />
+      @update:clicked-card-content="clickedCardHandler" class="container__display" />
     <SearchBox :state="searchBoxState" search-box-style="margin: auto 0;" :is-searchbox-focus="isSearchBoxFocus"
       @update:is-searchbox-focus="searchBoxFocusHandler" :search-value="searchValue" @update:search-value="searchHandler"
-      :submit-value="submitValue" @update:submit-value="submitHandler" />
+      :submit-value="submitValue" @update:submit-value="submitHandler" class="container__search-box" />
   </div>
 </template>
 
@@ -199,6 +199,25 @@ export default {
 
    @media only screen and (min-width: 1024px) {
      padding: 0 80px;
+   }
+
+   &__display {
+     margin-top: 16px;
+   }
+
+   &__search-box {
+     position: absolute;
+     bottom: 0;
+     left: 0;
+     padding: 0 24px;
+
+     @media only screen and (min-width: 640px) {
+       padding: 0 40px;
+     }
+
+     @media only screen and (min-width: 1024px) {
+       padding: 0 80px;
+     }
    }
  }
 </style>

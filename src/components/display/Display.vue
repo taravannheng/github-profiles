@@ -71,7 +71,6 @@ export default {
   max-height: 560px;
   overflow-x: hidden;
   overflow-y: scroll;
-  padding-top: 36px;
   padding-bottom: 36px;
   background-color: transparent;
 }

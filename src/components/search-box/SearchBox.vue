@@ -91,9 +91,11 @@ export default {
 
 .search-box {
   width: clamp(100%, 100%, 100%);
+  background-color: map-get($colors, darkest);
   overflow: hidden;
 
   &__logo {
+    margin-top: 16px;
     margin-left: -4px;
     margin-bottom: 8px;
     height: clamp(40px, 40px, 40px);
