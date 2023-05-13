@@ -22,8 +22,5 @@ export default defineConfig({
         `
       }
     }
-  },
-  define: {
-    __APP_ENV__: process.env.VITE_GITHUB_PERSONAL_ACCESS_TOKEN,
-  },
+  }
 })

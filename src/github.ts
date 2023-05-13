@@ -3,17 +3,11 @@ import _ from "lodash";
 
 const baseURL = "https://api.github.com";
 
-const options = {
-  headers: {
-    Authorization: `token ${import.meta.env.VITE_GITHUB_PERSONAL_ACCESS_TOKEN}`,
-  },
-}
-
 
 const getUsers = async (username: string) => {
   try {
     if (!_.isEmpty(username)) {
-      const response = await axios.get(`${baseURL}/search/users?q=${username}`, options);
+      const response = await axios.get(`${baseURL}/search/users?q=${username}`);
 
       return response.data;
     }
@@ -25,7 +19,7 @@ const getUsers = async (username: string) => {
 const getUserInfo = async (username: string) => {
   try {
     if (!_.isEmpty(username)) {
-      const response = await axios.get(`${baseURL}/users/${username}`, options);
+      const response = await axios.get(`${baseURL}/users/${username}`);
       return response.data;
     }
   } catch (error) {
@@ -36,7 +30,7 @@ const getUserInfo = async (username: string) => {
 const getRepos = async (username: string) => {
   try {
     if (!_.isEmpty(username)) {
-      const response = await axios.get(`${baseURL}/users/${username}/repos`, options);
+      const response = await axios.get(`${baseURL}/users/${username}/repos`);
       return response.data;  
     }
   } catch (error) {
@@ -63,7 +57,7 @@ const getLatestRepo = async (username: string) => {
 
   try {
     if (!_.isEmpty(username) && !_.isEmpty(mostRecentRepo)) {
-      const response = await axios.get(`${baseURL}/repos/${username}/${mostRecentRepo.name}`, options);
+      const response = await axios.get(`${baseURL}/repos/${username}/${mostRecentRepo.name}`);
       return response.data;
     }
   } catch (error) {
@@ -77,7 +71,7 @@ const getRepoLanguages = async (username: string) => {
 
   try {
     if (!_.isEmpty(username) && !_.isEmpty(latestRepoName)) {
-      const response = await axios.get(`${baseURL}/repos/${username}/${latestRepoName}/languages`, options);
+      const response = await axios.get(`${baseURL}/repos/${username}/${latestRepoName}/languages`);
       return response.data;
     }
 
@@ -93,7 +87,7 @@ const getLatestCommit = async (username: string) => {
 
   try {
     if (!_.isEmpty(username) && !_.isEmpty(latestRepoName)) {
-      const response = await axios.get(`${baseURL}/repos/${username}/${latestRepoName}/commits?per_page=1`, options);
+      const response = await axios.get(`${baseURL}/repos/${username}/${latestRepoName}/commits?per_page=1`);
       const commits = response.data;
     
       commits.sort((a: any, b: any) => {
