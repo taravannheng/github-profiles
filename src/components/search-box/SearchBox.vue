@@ -1,7 +1,7 @@
 <template>
   <div class="search-box" :style="`${searchBoxStyle}`">
     <img src="../../assets/images/github.png" alt="github logo" class="search-box__logo" :style="`${searchBoxLogoStyle}`">
-    <form class="search-box__form" @submit.prevent="onSubmit" :class="['state-search-box__form', state]">
+    <form class="search-box__form" @submit.prevent="submitHandler" :class="['state-search-box__form', state]">
       <div class="search-box__field-container">
         <input @keyup="suggestionHandler" v-model="searchValue" type="text" class="search-box__field"
           :style="`${searchBoxFieldStyle}`" placeholder="username" :class="['state-search-box__field', state]" />
@@ -15,6 +15,8 @@
 </template>
 
 <script lang="ts">
+
+import _ from "lodash";
 
 export default {
   name: 'SearchBox',
@@ -70,8 +72,12 @@ export default {
       this.searchValue = target.value;
       this.$emit('update:search-value', this.searchValue);
     },
-    onSubmit() {
+    submitHandler() {
       this.$emit('update:submit-value', this.searchValue);
+
+      if (!_.isEmpty(this.searchValue)) {
+        this.searchValue = '';
+      }
     }
   }
 };
