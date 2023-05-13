@@ -11,7 +11,7 @@
 <script lang="ts">
 import Profile from '../profile/Profile.vue';
 import Repo from '../repo/Repo.vue';
-import Divider from '../divider/divider.vue';
+import Divider from '../divider/Divider.vue';
 
 export default {
   name: 'ProfileDisplay',
