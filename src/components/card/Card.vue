@@ -1,7 +1,8 @@
 <template>
-  <div class="card" :style="`${cardStyle}`">
+  <div class="card" :style="`${cardStyle}`" :class="['type-card', type]">
     <p class="card__text d-flex flex-row align-items-center"
-      :style="`cursor: ${isClickable ? 'pointer;' : 'default;'} ${cardTextStyle}}`" @click="clickHandler">{{ content }}
+      :style="`cursor: ${isClickable ? 'pointer;' : 'default;'} ${cardTextStyle}}`" @click="clickHandler"
+      :class="['type-card__text', type]">{{ content }}
     </p>
   </div>
 </template>
@@ -26,6 +27,13 @@ export default {
     isClickable: {
       type: Boolean,
       required: false,
+    },
+    type: {
+      type: String,
+      validator: function (value: string) {
+        return ['default', 'error'].includes(value);
+      },
+      default: 'default'
     }
   },
   methods: {
@@ -66,6 +74,38 @@ export default {
 
     &:hover {
       background-color: map-get($colors, dark-primary);
+    }
+  }
+}
+
+.type-card {
+  transition: background-color 0.3s linear;
+
+  &.default {
+    background-color: map-get($colors, light-primary);
+  }
+
+  &.error {
+    border-top: 0;
+    border-right: 0;
+    border-bottom: 0;
+    background-color: map-get($colors, light-error);
+    border-left-color: map-get($colors, dark-error);
+  }
+
+  &__text {
+    transition: background-color 0.3s linear;
+
+    &.default {
+      background-color: map-get($colors, light-primary);
+    }
+
+    &.error {
+      background-color: map-get($colors, light-error);
+
+      &:hover {
+        background-color: map-get($colors, dark-error);
+      }
     }
   }
 }

@@ -65,12 +65,15 @@ const getLatestRepo = async (username: string) => {
 
 const getRepoLanguages = async (username: string) => {
   const latestRepo = await getLatestRepo(username);
+  const latestRepoName = latestRepo?.name ?? null;
 
   try {
-    if (!_.isEmpty(username) && !_.isEmpty(latestRepo)) {
-      const response = await axios.get(`${baseURL}/repos/${username}/${latestRepo.name}/languages`);
+    if (!_.isEmpty(username) && !_.isEmpty(latestRepoName)) {
+      const response = await axios.get(`${baseURL}/repos/${username}/${latestRepoName}/languages`);
       return response.data;
     }
+
+    return null;
   } catch(error) {
     console.error(error);
   }
@@ -78,19 +81,29 @@ const getRepoLanguages = async (username: string) => {
 
 const getLatestCommit = async (username: string) => {
   const latestRepo = await getLatestRepo(username);
-  const response = await axios.get(`${baseURL}/repos/${username}/${latestRepo.name}/commits?per_page=1`);
-  const commits = response.data;
+  const latestRepoName = latestRepo?.name ?? null;
 
-  commits.sort((a: any, b: any) => {
-    const dateA = new Date(a.commit.author.date);
-    const dateB = new Date(b.commit.author.date);
-    return dateB.getTime() - dateA.getTime();
-  });
-  
-  // get the latest commit
-  const latestCommit = commits[0];
+  try {
+    if (!_.isEmpty(username) && !_.isEmpty(latestRepoName)) {
+      const response = await axios.get(`${baseURL}/repos/${username}/${latestRepoName}/commits?per_page=1`);
+      const commits = response.data;
+    
+      commits.sort((a: any, b: any) => {
+        const dateA = new Date(a.commit.author.date);
+        const dateB = new Date(b.commit.author.date);
+        return dateB.getTime() - dateA.getTime();
+      });
+      
+      // get the latest commit
+      const latestCommit = commits[0];
+    
+      return latestCommit;
+    }
 
-  return latestCommit;
+    return null;
+  } catch (error) {
+    console.error(error);
+  }
 };
 
 export { getUsers, getUserInfo, getLatestRepo, getRepoLanguages, getLatestCommit };

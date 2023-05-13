@@ -95,7 +95,8 @@ export default {
     },
     async getLatestCommit() {
       const response = await getLatestCommit(this.submitValue);
-      this.userLatestCommit = response.commit.message;
+
+      this.userLatestCommit = response?.commit?.message ?? 'N/A';
     },
     async searchHandler(value: string) {
       this.searchValue = value;
@@ -149,7 +150,7 @@ export default {
         this.profileDisplayData.following = this.userInfo.following;
         this.profileDisplayData.name = this.userInfo?.name ?? 'N/A';
         this.profileDisplayData.email = this.userInfo?.email ?? 'N/A';
-        this.profileDisplayData.latestRepoName = this.userLatestRepo?.name ?? 'N/A';
+        this.profileDisplayData.latestRepoName = this.userLatestRepo?.name ?? null;
         this.profileDisplayData.latestRepoHTMLURL = this.userLatestRepo?.html_url ?? 'N/A';
         this.profileDisplayData.latestRepoDescription = this.userLatestRepo?.description ?? 'N/A';
         this.profileDisplayData.latestRepoLanguages = this.userLatestRepoLanguages ?? 'N/A';

@@ -1,7 +1,7 @@
 <template>
   <div class="repo" :style="`${repoStyle}`" v-if="repoData">
     <h1 class="repo__title">Latest Repository</h1>
-    <div class="repo__body">
+    <div class="repo__body" v-if="repoData.latestRepoName">
       <div class="body__icon"><font-awesome-icon icon="book-bookmark" class="repo__icon" /></div>
       <div class="body__details">
         <h2 class="details__repo-name"><a :href="`${repoData.latestRepoHTMLURL}`" target="_blank">{{
@@ -16,6 +16,9 @@
           <Card :content="repoData.latestRepoLatestCommit" style="max-height: 24px; padding: 14px 0; max-width: 300px; white-space: nowrap;" />
         </div>
       </div>
+    </div>
+    <div class="repo__empty" v-if="!repoData.latestRepoName">
+      <Card content="No repository found!" type="error" />
     </div>
   </div>
 </template>
@@ -76,6 +79,12 @@ export default {
   &__body {
     display: flex;
     flex-direction: row;
+  }
+
+  &__empty {
+    &-text {
+      color: map-get($colors, dark-error);
+    }
   }
 
   &__icon {
