@@ -77,7 +77,11 @@ export default {
     },
     async getRepoLanguages() {
       const response = await getRepoLanguages(this.submitValue);
-      let languages = Object.keys(response).join(" · ");
+      let languages = '';
+
+      if (response) {
+        languages = Object.keys(response).join(" · ");
+      }
 
       if (_.isEmpty(languages)) {
         languages = 'N/A';

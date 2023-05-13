@@ -69,7 +69,6 @@ export default {
   methods: {
     focusHandler() {
       this.$emit('update:is-searchbox-focus', true);
-      console.log('focusing...')
     },
     suggestionHandler(event: InputEvent) {
       const target = event.target as HTMLInputElement;
