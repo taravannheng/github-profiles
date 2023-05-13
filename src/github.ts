@@ -5,7 +5,7 @@ const baseURL = "https://api.github.com";
 
 const options = {
   headers: {
-    Authorization: `token ${process.env.VUE_APP_GITHUB_PERSONAL_ACCESS_TOKEN}`,
+    Authorization: `token ${import.meta.env.VITE_GITHUB_PERSONAL_ACCESS_TOKEN}`,
   },
 }
 
