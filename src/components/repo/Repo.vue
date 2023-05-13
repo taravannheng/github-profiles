@@ -9,11 +9,11 @@
         <p class="details__repo-description">{{ repoData.latestRepoDescription }}</p>
         <div class="details__repo-language">
           <h3 class="repo-language__title">Languages</h3>
-          <Card :content="repoData.latestRepoLanguages" style="max-height: 24px; padding: 14px 0;" />
+          <Card :content="repoData.latestRepoLanguages" style="max-height: 24px; padding: 14px 0; max-width: 300px; white-space: nowrap;" />
         </div>
         <div class="details__repo-commit">
           <h3 class="repo-commit__title">Latest Commit</h3>
-          <Card :content="repoData.latestRepoLatestCommit" style="max-height: 24px; padding: 14px 0;" />
+          <Card :content="repoData.latestRepoLatestCommit" style="max-height: 24px; padding: 14px 0; max-width: 300px; white-space: nowrap;" />
         </div>
       </div>
     </div>
