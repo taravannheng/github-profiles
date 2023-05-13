@@ -1,5 +1,5 @@
 <template>
-  <div class="display" :class="['state', state]"> 
+  <div class="display" :class="['state', state]">
     <div v-if="state === 'default'">
       <ProgressIndicator loading-text="Start your search below..." />
     </div>
@@ -7,7 +7,8 @@
       <ProgressIndicator loading-text="Start your search below..." is-loading />
     </div>
     <div v-if="state === 'suggestion'">
-      <Suggestion v-if="suggestionData" :suggestion-data="suggestionData" />
+      <Suggestion v-if="suggestionData" :suggestion-data="suggestionData" :clicked-card-content="clickedCardContent"
+        @update:clicked-card-content="clickHandler" />
     </div>
     <div v-if="state === 'profile'">
       <ProfileDisplay v-if="profileDisplayData" :profile-display-data="profileDisplayData" />
@@ -16,9 +17,9 @@
 </template>
 
 <script lang="ts">
-  import ProgressIndicator from '../progress-indicator/ProgressIndicator.vue';
-  import Suggestion from '../suggestion/Suggestion.vue';
-  import ProfileDisplay from '../profile-display/ProfileDisplay.vue';
+import ProgressIndicator from '../progress-indicator/ProgressIndicator.vue';
+import Suggestion from '../suggestion/Suggestion.vue';
+import ProfileDisplay from '../profile-display/ProfileDisplay.vue';
 
 export default {
   name: 'Display',
@@ -30,7 +31,7 @@ export default {
   props: {
     state: {
       type: String,
-      validator: function(value: string) {
+      validator: function (value: string) {
         return ['default', 'loading', 'suggestion', 'profile'].includes(value);
       },
       default: 'default'
@@ -42,34 +43,48 @@ export default {
     profileDisplayData: {
       type: Object,
       required: false,
+    },
+  },
+  methods: {
+    clickHandler(value: string) {
+      if (this.state === 'suggestion') {
+        this.clickedCardContent = value;
+        this.$emit('update:clicked-card-content', this.clickedCardContent);
+      }
     }
-  }
+  },
+  data() {
+    return {
+      clickedCardContent: '' as string,
+    }
+  },
 };
 </script>
 
 <style lang="scss" scoped>
 @import '@/assets/scss/main.scss';
 
-  .display {
-    width: 100%;
-    max-width: 100%;
-    height: 560px;
-    max-height: 560px;
-    overflow-x: hidden;
-    overflow-y: scroll;
-    padding-top: 36px;
-    padding-bottom: 36px;
-    background-color: transparent;  
-  }
+.display {
+  width: 100%;
+  max-width: 100%;
+  height: 560px;
+  max-height: 560px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  padding-top: 36px;
+  padding-bottom: 36px;
+  background-color: transparent;
+}
 
-  .state.default, .state.loading {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+.state.default,
+.state.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-  .state.profile {
-    background-color: map-get($colors, light-primary);  
-  }
+.state.profile {
+  background-color: map-get($colors, light-primary);
+}
 </style>
 

@@ -4,8 +4,8 @@
     <small class="suggestion__caption" v-if="suggestionData.length">Here's what we found...</small>
     <div class="suggestion__card-container d-flex flex-column gap-1">
       <div class="suggestion__card" v-for="(item, index) in suggestionData" v-if="suggestionData" :key="index">
-        <Card :content="item.login" />
-        <!-- add is-clickable prop to the card component when able to fill the searchbox with the content of the card -->
+        <Card :content="item.login" is-clickable :clicked-card-content="clickedCardContent"
+          @update:clicked-card-content="clickHandler" />
       </div>
       <div class="suggestion__card-empty" v-if="!suggestionData.length"><span class="card-empty__text"></span>We couldn't
         find any users...</div>
@@ -19,6 +19,11 @@ import Card from "../card/Card.vue";
 
 export default {
   name: 'Suggestion',
+  data() {
+    return {
+      clickedCardContent: '' as string,
+    }
+  },
   props: {
     suggestionStyle: {
       type: String,
@@ -28,6 +33,12 @@ export default {
       type: Array,
       required: true,
     },
+  },
+  methods: {
+    clickHandler(value: string) {
+      this.clickedCardContent = value;
+      this.$emit('update:clicked-card-content', this.clickedCardContent);
+    }
   },
   components: {
     Card,

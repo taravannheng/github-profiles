@@ -37,8 +37,8 @@ export default {
       displayStyle: 'margin-top: 52px; max-width: 100%;' as string,
       searchValue: '' as string,
       submitValue: '' as string,
-      displayState: "default" as String,
-      searchBoxState: "default" as String,
+      displayState: "default" as string,
+      searchBoxState: "default" as string,
       suggestionData: [] as any[] | null,
       userInfo: {} as any,
       userLatestRepo: {} as any,
@@ -48,6 +48,10 @@ export default {
     };
   },
   methods: {
+    clickedCardHandler(value: string) {
+      this.submitValue = value;
+      this.submitHandler(this.submitValue);
+    },
     getDisplayStyle() {
       return this.displayState === 'profile' ? 'margin-top: 52px; max-width: 382px;' : 'margin-top: 52px; max-width: 100%;';
     },
@@ -167,15 +171,15 @@ export default {
   <div class="container">
     <Header text="GitHub Profiles"></Header>
     <Display :state="displayState" :suggestion-data="suggestionData" :profile-display-data="profileDisplayData"
-      :style="this.displayStyle" />
-    <SearchBox :state="searchBoxState" search-box-style="margin: auto 0;" :is-searchbox-focus="isSearchBoxFocus" @update:is-searchbox-focus="searchBoxFocusHandler"  :search-value="searchValue"
-      @update:search-value="searchHandler" :submit-value="submitValue" @update:submit-value="submitHandler" />
+      :style="this.displayStyle" :clicked-card-content="clickedCardContent"
+      @update:clicked-card-content="clickedCardHandler" />
+    <SearchBox :state="searchBoxState" search-box-style="margin: auto 0;" :is-searchbox-focus="isSearchBoxFocus"
+      @update:is-searchbox-focus="searchBoxFocusHandler" :search-value="searchValue" @update:search-value="searchHandler"
+      :submit-value="submitValue" @update:submit-value="submitHandler" />
   </div>
 </template>
 
-<style scoped lang="scss"> 
-
-@import '@/assets/scss/main.scss';
+<style scoped lang="scss"> @import '@/assets/scss/main.scss';
 
  .container {
    display: flex;

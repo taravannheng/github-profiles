@@ -1,6 +1,8 @@
 <template>
-  <div class="card" :style="`${cardStyle}`"> 
-    <p class="card__text d-flex flex-row align-items-center" :style="`cursor: ${isClickable ? 'pointer;' : 'default;'} ${cardTextStyle}}`">{{ content }}</p>
+  <div class="card" :style="`${cardStyle}`">
+    <p class="card__text d-flex flex-row align-items-center"
+      :style="`cursor: ${isClickable ? 'pointer;' : 'default;'} ${cardTextStyle}}`" @click="clickHandler">{{ content }}
+    </p>
   </div>
 </template>
 
@@ -24,6 +26,13 @@ export default {
     isClickable: {
       type: Boolean,
       required: false,
+    }
+  },
+  methods: {
+    clickHandler() {
+      if (this.isClickable) {
+        this.$emit('update:clicked-card-content', this.content);
+      }
     }
   }
 };
