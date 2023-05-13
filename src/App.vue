@@ -33,6 +33,7 @@ export default {
   },
   data() {
     return {
+      isSearchBoxFocus: false,
       displayStyle: 'margin-top: 52px; max-width: 100%;' as string,
       searchValue: '' as string,
       submitValue: '' as string,
@@ -55,6 +56,15 @@ export default {
         this.displayState = state;
       }, 900);
     },
+    searchBoxFocusHandler(value: boolean) {
+      this.isSearchBoxFocus = value;
+      if (this.isSearchBoxFocus) {
+
+        // update display state to default and reset display style to default
+        this.displayState = 'default';
+        this.displayStyle = this.getDisplayStyle();
+      }
+    },
     async getUsers() {
       const response = await getUsers(this.searchValue);
       this.suggestionData = response.items;
@@ -67,7 +77,12 @@ export default {
     },
     async getRepoLanguages() {
       const response = await getRepoLanguages(this.submitValue);
-      const languages = Object.keys(response).join(" · ");
+      let languages = Object.keys(response).join(" · ");
+
+      if (_.isEmpty(languages)) {
+        languages = 'N/A';
+      }
+
       this.userLatestRepoLanguages = languages;
     },
     async getLatestCommit() {
@@ -149,7 +164,7 @@ export default {
     <Header text="GitHub Profiles"></Header>
     <Display :state="displayState" :suggestion-data="suggestionData" :profile-display-data="profileDisplayData"
       :style="this.displayStyle" />
-    <SearchBox :state="searchBoxState" search-box-style="margin: auto 0;" :search-value="searchValue"
+    <SearchBox :state="searchBoxState" search-box-style="margin: auto 0;" :is-searchbox-focus="isSearchBoxFocus" @update:is-searchbox-focus="searchBoxFocusHandler"  :search-value="searchValue"
       @update:search-value="searchHandler" :submit-value="submitValue" @update:submit-value="submitHandler" />
   </div>
 </template>
