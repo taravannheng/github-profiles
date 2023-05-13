@@ -3,7 +3,6 @@ import _ from "lodash";
 
 const baseURL = "https://api.github.com";
 
-
 const getUsers = async (username: string) => {
   try {
     if (!_.isEmpty(username)) {
@@ -64,6 +63,19 @@ const getLatestRepo = async (username: string) => {
   }
 };
 
+const getRepoLanguages = async (username: string) => {
+  const latestRepo = await getLatestRepo(username);
+
+  try {
+    if (!_.isEmpty(username) && !_.isEmpty(latestRepo)) {
+      const response = await axios.get(`${baseURL}/repos/${username}/${latestRepo.name}/languages`);
+      return response.data;
+    }
+  } catch(error) {
+    console.error(error);
+  }
+}
+
 const getLatestCommit = async (username: string) => {
   const latestRepo = await getLatestRepo(username);
   const response = await axios.get(`${baseURL}/repos/${username}/${latestRepo.name}/commits?per_page=1`);
@@ -81,4 +93,4 @@ const getLatestCommit = async (username: string) => {
   return latestCommit;
 };
 
-export { getUsers, getUserInfo, getLatestRepo, getLatestCommit };
+export { getUsers, getUserInfo, getLatestRepo, getRepoLanguages, getLatestCommit };
