@@ -7,10 +7,10 @@
       <ProgressIndicator loading-text="Start your search below..." is-loading />
     </div>
     <div v-if="state === 'suggestion'">
-      <Suggestion :suggestion-data="suggestionData" />
+      <Suggestion v-if="suggestionData" :suggestion-data="suggestionData" />
     </div>
     <div v-if="state === 'profile'">
-      <!-- <Profile /> -->
+      <ProfileDisplay v-if="profileDisplayData" :profile-display-data="profileDisplayData" />
     </div>
   </div>
 </template>
@@ -18,12 +18,14 @@
 <script lang="ts">
   import ProgressIndicator from '../progress-indicator/ProgressIndicator.vue';
   import Suggestion from '../suggestion/Suggestion.vue';
+  import ProfileDisplay from '../profile-display/ProfileDisplay.vue';
 
 export default {
   name: 'Display',
   components: {
     ProgressIndicator,
     Suggestion,
+    ProfileDisplay,
   },
   props: {
     state: {
@@ -37,7 +39,7 @@ export default {
       type: Array,
       required: false,
     },
-    profileData: {
+    profileDisplayData: {
       type: Object,
       required: false,
     }
@@ -54,8 +56,9 @@ export default {
     height: 560px;
     max-height: 560px;
     overflow-x: hidden;
+    overflow-y: scroll;
     padding-top: 36px;
-    // padding: 36px 24px 0 24px; // this padding is not relevant if the display shows suggestion
+    padding-bottom: 36px;
     background-color: transparent;  
   }
 
