@@ -5,7 +5,23 @@ import Header from "./components/header/Header.vue";
 import Display from './components/display/Display.vue';
 import Card from "./components/card/Card.vue";
 import SearchBox from './components/search-box/SearchBox.vue';
-import { getUsers, getUserInfo, getLatestRepo, getLatestCommit } from './github';
+import { getUsers, getUserInfo, getLatestRepo, getRepoLanguages, getLatestCommit } from './github';
+
+interface ProfileDisplayData {
+  avatar_url: string;
+  html_url: string;
+  username: string;
+  followers: string;
+  following: string;
+  name: string;
+  email: string;
+  latestRepoName: string;
+  latestRepoHTMLURL: string;
+  latestRepoDescription: string;
+  latestRepoLanguages: object;
+  latestRepoLatestCommit: string;
+}
+
 
 export default {
   name: 'App',
@@ -17,29 +33,52 @@ export default {
   },
   data() {
     return {
-      users: null as any[] |  null,
-      user: null as any[] |  null,
-      repo: null as any[] |  null,
-      commit: null as any[] |  null,
-      searchValue: '',
-      submitValue: '',
+      displayStyle: 'margin-top: 52px; max-width: 100%;' as string,
+      searchValue: '' as string,
+      submitValue: '' as string,
       displayState: "default" as String,
       searchBoxState: "default" as String,
       suggestionData: [] as any[] | null,
+      userInfo: {} as any,
+      userLatestRepo: {} as any,
+      userLatestRepoLanguages: {} as any,
+      userLatestCommit: {} as any,
+      profileDisplayData: {} as ProfileDisplayData,
     };
   },
   methods: {
+    getDisplayStyle() {
+      return this.displayState === 'profile' ? 'margin-top: 52px; max-width: 382px;' : 'margin-top: 52px; max-width: 100%;';
+    },
     delayUpdateDisplayState(state: string) {
       setTimeout(() => {
-          this.displayState = state;
-        }, 900);
+        this.displayState = state;
+      }, 900);
     },
     async getUsers() {
-      this.users = await getUsers(this.searchValue);
-      this.suggestionData = this.users.items;
+      const response = await getUsers(this.searchValue);
+      this.suggestionData = response.items;
     },
-    searchHandler(value: string) {
+    async getUserInfo() {
+      this.userInfo = await getUserInfo(this.submitValue);
+    },
+    async getLatestRepo() {
+      this.userLatestRepo = await getLatestRepo(this.submitValue);
+    },
+    async getRepoLanguages() {
+      const response = await getRepoLanguages(this.submitValue);
+      const languages = Object.keys(response).join(" · ");
+      this.userLatestRepoLanguages = languages;
+    },
+    async getLatestCommit() {
+      const response = await getLatestCommit(this.submitValue);
+      this.userLatestCommit = response.commit.message;
+    },
+    async searchHandler(value: string) {
       this.searchValue = value;
+
+      // reset display style to default
+      this.displayStyle = this.getDisplayStyle();
 
       // update Display state to loading
       this.displayState = 'loading'
@@ -50,17 +89,55 @@ export default {
       }
 
       if (!_.isEmpty(value)) {
-        this.getUsers();
+        await this.getUsers();
         this.delayUpdateDisplayState('suggestion');
         this.searchBoxState = 'suggestion';
       }
     },
-    submitHandler(value: string) {
-      this.searchBoxState = "error";
+    async submitHandler(value: string) {
+      this.submitValue = value;
 
-      setTimeout(() => {
-        this.searchBoxState = "default";
-      }, 1000);
+      if (_.isEmpty(value)) {
+        this.searchBoxState = "error";
+
+        setTimeout(() => {
+          this.searchBoxState = "default";
+        }, 1000);
+      }
+
+      if (!_.isEmpty(value)) {
+        // get user info
+        await this.getUserInfo();
+
+        // get the latest repo
+        await this.getLatestRepo();
+
+        // get the latest repo
+        await this.getRepoLanguages();
+
+        // get the latest commit
+        await this.getLatestCommit();
+
+        // add details to profileData
+        this.profileDisplayData.avatar_url = this.userInfo.avatar_url;
+        this.profileDisplayData.html_url = this.userInfo.html_url;
+        this.profileDisplayData.username = this.userInfo.login;
+        this.profileDisplayData.followers = this.userInfo.followers;
+        this.profileDisplayData.following = this.userInfo.following;
+        this.profileDisplayData.name = this.userInfo?.name ?? 'N/A';
+        this.profileDisplayData.email = this.userInfo?.email ?? 'N/A';
+        this.profileDisplayData.latestRepoName = this.userLatestRepo?.name ?? 'N/A';
+        this.profileDisplayData.latestRepoHTMLURL = this.userLatestRepo?.html_url ?? 'N/A';
+        this.profileDisplayData.latestRepoDescription = this.userLatestRepo?.description ?? 'N/A';
+        this.profileDisplayData.latestRepoLanguages = this.userLatestRepoLanguages ?? 'N/A';
+        this.profileDisplayData.latestRepoLatestCommit = this.userLatestCommit ?? 'N/A';
+
+        // update the states for search box and display
+        this.displayState = "profile";
+
+        // set max width to display component
+        this.displayStyle = this.getDisplayStyle();
+      }
     }
   },
 };
@@ -69,18 +146,21 @@ export default {
 <template>
   <div class="container">
     <Header text="GitHub Profiles"></Header>
-    <Display :state="displayState" :suggestion-data="suggestionData" />
-    <SearchBox :state="searchBoxState" search-box-style="margin: auto 0;" :search-value="searchValue" @update:search-value="searchHandler" :submit-value="submitValue" @update:submit-value="submitHandler" />
+    <Display :state="displayState" :suggestion-data="suggestionData" :profile-display-data="profileDisplayData"
+      :style="this.displayStyle" />
+    <SearchBox :state="searchBoxState" search-box-style="margin: auto 0;" :search-value="searchValue"
+      @update:search-value="searchHandler" :submit-value="submitValue" @update:submit-value="submitHandler" />
   </div>
-
-  <!-- <button class="btn btn-primary" @click="getUser">Get User Info</button> -->
 </template>
 
-<style scoped lang="scss"> @import '@/assets/scss/main.scss';
+<style scoped lang="scss"> 
+
+@import '@/assets/scss/main.scss';
 
  .container {
-  display: flex;
-  flex-direction: column;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
    min-width: 100%;
    width: 100%;
    max-width: 1024px;
@@ -89,11 +169,11 @@ export default {
    padding: 0 24px;
 
    @media only screen and (min-width: 640px) {
-    padding: 0 40px;
+     padding: 0 40px;
    }
 
    @media only screen and (min-width: 1024px) {
-    padding: 0 80px;
+     padding: 0 80px;
    }
  }
 </style>
