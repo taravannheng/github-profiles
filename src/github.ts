@@ -1,21 +1,40 @@
 import axios from "axios";
+import _ from "lodash";
 
 const baseURL = "https://api.github.com";
 
 
 const getUsers = async (username: string) => {
-  const response = await axios.get(`${baseURL}/search/users?q=${username}`);
-  return response.data;
+  try {
+    if (!_.isEmpty(username)) {
+      const response = await axios.get(`${baseURL}/search/users?q=${username}`);
+      return response.data;
+    }
+  } catch (error) {
+    console.error(error);
+  }
 };
 
 const getUserInfo = async (username: string) => {
-  const response = await axios.get(`${baseURL}/users/${username}`);
-  return response.data;
+  try {
+    if (!_.isEmpty(username)) {
+      const response = await axios.get(`${baseURL}/users/${username}`);
+      return response.data;
+    }
+  } catch (error) {
+    console.error(error);
+  }
 };
 
 const getRepos = async (username: string) => {
-  const response = await axios.get(`${baseURL}/users/${username}/repos`);
-  https: return response.data;
+  try {
+    if (!_.isEmpty(username)) {
+      const response = await axios.get(`${baseURL}/users/${username}/repos`);
+      return response.data;  
+    }
+  } catch (error) {
+    console.error(error);
+  }
 };
 
 const getLatestRepo = async (username: string) => {
@@ -35,8 +54,14 @@ const getLatestRepo = async (username: string) => {
     }
   }
 
-  const response = await axios.get(`${baseURL}/repos/${username}/${mostRecentRepo.name}`);
-  return response.data;
+  try {
+    if (!_.isEmpty(username) && !_.isEmpty(mostRecentRepo)) {
+      const response = await axios.get(`${baseURL}/repos/${username}/${mostRecentRepo.name}`);
+      return response.data;
+    }
+  } catch (error) {
+    console.error(error);
+  }
 };
 
 const getLatestCommit = async (username: string) => {
