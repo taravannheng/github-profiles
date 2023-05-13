@@ -2,6 +2,12 @@ import axios from "axios";
 
 const baseURL = "https://api.github.com";
 
+
+const getUsers = async (username: string) => {
+  const response = await axios.get(`${baseURL}/search/users?q=${username}`);
+  return response.data;
+};
+
 const getUserInfo = async (username: string) => {
   const response = await axios.get(`${baseURL}/users/${username}`);
   return response.data;
@@ -50,4 +56,4 @@ const getLatestCommit = async (username: string) => {
   return latestCommit;
 };
 
-export { getUserInfo, getLatestRepo, getLatestCommit };
+export { getUsers, getUserInfo, getLatestRepo, getLatestCommit };
