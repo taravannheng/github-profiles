@@ -134,6 +134,7 @@ export default {
 
         // update the states for search box and display
         this.displayState = "profile";
+        this.searchBoxState = "default";
 
         // set max width to display component
         this.displayStyle = this.getDisplayStyle();
