@@ -31,17 +31,13 @@ export default {
 
   &__text {
     color: map-get($colors, dark-primary);
-    font-size: map-get($font-sizes, h3);
-    font-weight: map-get($font-weights, h3);
+    font-size: map-get($font-sizes, h2);
+    font-weight: map-get($font-weights, h2);
     padding-top: 52px;
 
     @media only screen and (min-width: 640px) {
       font-size: map-get($font-sizes, h2);
       font-weight: map-get($font-weights, h2);
-    }
-
-    @media only screen and (min-width: 768px) {
-      padding-top: 80px;
     }
 
     @media only screen and (min-width: 1024px) {
