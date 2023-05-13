@@ -189,7 +189,7 @@ export default {
    min-width: 100%;
    width: 100%;
    max-width: 1024px;
-   height: 100%;
+   height: clamp(100vh, 100vh, 100vh);
    background-color: map-get($colors, darkest);
    padding: 0 24px;
 
