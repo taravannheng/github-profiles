@@ -12,9 +12,11 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
+    "@types/lodash": "^4.14.194",
     "axios": "^1.4.0",
     "bootstrap": "^5.2.3",
     "jquery": "^3.7.0",
+    "lodash": "^4.17.21",
     "pinia": "^2.0.35",
     "popper.js": "^1.16.1",
     "sass-loader": "^13.2.2",
