@@ -50,6 +50,7 @@ export default {
     width: clamp(100%, 100%, 100%);
     height: clamp(100%, 100%, 100%);
     padding-left: 18px;
+    padding-right: 18px;
     margin: 0;
     transition: background-color 0.3s linear;
 
