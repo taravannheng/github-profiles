@@ -4,9 +4,11 @@
     <small class="suggestion__caption" v-if="suggestionData.length">Here's what we found...</small>
     <div class="suggestion__card-container d-flex flex-column gap-1">
       <div class="suggestion__card" v-for="(item, index) in suggestionData" v-if="suggestionData" :key="index">
-        <Card :content="item.login" /> <!-- add is-clickable prop to the card component when able to fill the searchbox with the content of the card -->
+        <Card :content="item.login" />
+        <!-- add is-clickable prop to the card component when able to fill the searchbox with the content of the card -->
       </div>
-      <div class="suggestion__card-empty" v-if="!suggestionData.length"><span class="card-empty__text"></span>We couldn't find any users...</div>
+      <div class="suggestion__card-empty" v-if="!suggestionData.length"><span class="card-empty__text"></span>We couldn't
+        find any users...</div>
     </div>
   </div>
 </template>
