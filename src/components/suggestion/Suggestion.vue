@@ -71,6 +71,7 @@ export default {
     flex-wrap: wrap;
     max-width: 100%;
     margin-top: 24px;
+    padding-bottom: 24px;
   }
 
   &__avatar {
