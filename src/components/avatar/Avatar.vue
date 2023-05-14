@@ -1,9 +1,9 @@
 <template>
   <div class="avatar" v-if="avatarData" :style="`cursor: ${isClickable ? 'pointer;' : 'default;'} ${avatarStyle}}`" @click="clickHandler">
     <img :src="`${avatarData.avatar_url}`" alt="profile picture" class="avatar__img" :style="`${avatarImgStyle}`" />
-    <small v-if="avatarData.username" class="avatar__username" :style="`${avatarUsernameStyle}`"><a
+    <small v-if="!isClickable" class="avatar__username" :style="`${avatarUsernameStyle}`"><a
         :href="avatarData.html_url" target="_blank">{{ avatarData.username }}</a></small>
-    <small v-if="avatarData.login" class="avatar__username is-clickable" :style="`${avatarUsernameStyle}`">{{ avatarData.login }}</small>
+    <small v-if="isClickable" class="avatar__username is-clickable" :style="`${avatarUsernameStyle}`">{{ avatarData.username }}</small>
   </div>
 </template>
 
@@ -35,7 +35,7 @@ export default {
   methods: {
     clickHandler() {
       if (this.isClickable) {
-        const avatarContent = {avatar_url: this.avatarData?.avatar_url ?? null, username: this.avatarData?.login ?? ''}
+        const avatarContent = {avatar_url: this.avatarData?.avatar_url ?? null, username: this.avatarData?.username ?? ''}
         this.$emit('update:clicked-avatar-content', avatarContent);
       }
     }

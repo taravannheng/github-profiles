@@ -1,8 +1,6 @@
 import axios from "axios";
 import _ from "lodash";
 
-import {type UserBasicInfo} from "@/types";
-
 const baseURL = "https://api.github.com";
 
 
@@ -12,27 +10,13 @@ const getUsers = async (username: string) => {
       const response = await axios.get(`${baseURL}/search/users?q=${username}`);
       let users = response.data.items.map((item: any) => {
         const user = {
-          login: item.login,
-          name: item.name,
-          email: item.email,
+          username: item.login,
           avatar_url: item.avatar_url,
-          html_url: item.html_url,
-          followers: item.followers,
-          following: item.following
         };
         return user;
       });
-
-      // replace undefined data with N/A or 0
-      const updatedUsers = users.map((user: UserBasicInfo) => ({
-        ...user,
-        followers: user.followers ?? '0',
-        following: user.following ?? '0',
-        name: user.name ?? 'N/A',
-        email: user.email ?? 'N/A'
-      }));
       
-      return updatedUsers;
+      return users;
     }
   } catch (error) {
     console.error(error);

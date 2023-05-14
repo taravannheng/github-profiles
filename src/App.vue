@@ -6,27 +6,7 @@ import Display from './components/display/Display.vue';
 import Card from "./components/card/Card.vue";
 import SearchBox from './components/search-box/SearchBox.vue';
 import { getUsers, getUserInfo, getLatestRepo, getRepoLanguages, getLatestCommit } from './github';
-
-interface ProfileDisplayData {
-  avatar_url: string;
-  html_url: string;
-  username: string;
-  followers: string;
-  following: string;
-  name: string;
-  email: string;
-  latestRepoName: string;
-  latestRepoHTMLURL: string;
-  latestRepoDescription: string;
-  latestRepoLanguages: object;
-  latestRepoLatestCommit: string;
-}
-
-interface AvatarContent {
-  avatar_url: string;
-  username: string;
-}
-
+import { type SuggestionData, type ProfileDisplayData, type AvatarContent } from "@/types";
 
 export default {
   name: 'App',
@@ -44,7 +24,7 @@ export default {
       submitValue: '' as string,
       displayState: "default" as string,
       searchBoxState: "default" as string,
-      suggestionData: [] as any[] | null,
+      suggestionData: [] as SuggestionData[] | null,
       userInfo: {} as any,
       userLatestRepo: {} as any,
       userLatestRepoLanguages: {} as any,
@@ -69,15 +49,13 @@ export default {
     searchBoxFocusHandler(value: boolean) {
       this.isSearchBoxFocus = value;
       if (this.isSearchBoxFocus) {
-
-        // update display state to default and reset display style to default
         this.displayState = 'default';
         this.displayStyle = this.getDisplayStyle();
       }
     },
     async getUsers() {
-      const response = await getUsers(this.searchValue);
-      this.suggestionData = response.items;
+      const users = await getUsers(this.searchValue);
+      this.suggestionData = users;
     },
     async getUserInfo() {
       this.userInfo = await getUserInfo(this.submitValue);
@@ -144,19 +122,11 @@ export default {
       if (!_.isEmpty(value)) {
         this.displayState = 'loading';
 
-        // get user info
         await this.getUserInfo();
-
-        // get the latest repo
         await this.getLatestRepo();
-
-        // get the latest repo
         await this.getRepoLanguages();
-
-        // get the latest commit
         await this.getLatestCommit();
 
-        // add details to profileData
         this.profileDisplayData.avatar_url = this.userInfo.avatar_url;
         this.profileDisplayData.html_url = this.userInfo.html_url;
         this.profileDisplayData.username = this.userInfo.login;
@@ -164,10 +134,13 @@ export default {
         this.profileDisplayData.following = this.userInfo.following;
         this.profileDisplayData.name = this.userInfo?.name ?? 'N/A';
         this.profileDisplayData.email = this.userInfo?.email ?? 'N/A';
+
         this.profileDisplayData.latestRepoName = this.userLatestRepo?.name ?? null;
         this.profileDisplayData.latestRepoHTMLURL = this.userLatestRepo?.html_url ?? 'N/A';
         this.profileDisplayData.latestRepoDescription = this.userLatestRepo?.description ?? 'N/A';
+
         this.profileDisplayData.latestRepoLanguages = this.userLatestRepoLanguages ?? 'N/A';
+
         this.profileDisplayData.latestRepoLatestCommit = this.userLatestCommit ?? 'N/A';
 
         // update the states for search box and display

@@ -1,11 +1,6 @@
-export interface UserBasicInfo {
-  login: string;
-  name: string;
-  email: string;
+export interface SuggestionData {
+  username: string;
   avatar_url: string;
-  html_url: string;
-  followers: string;
-  following: string;
 }
 
 export interface ProfileDisplayData {
