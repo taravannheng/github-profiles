@@ -101,12 +101,6 @@ export default {
     async searchHandler(value: string) {
       this.searchValue = value;
 
-      // scroll to top
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth',
-      })
-
       // reset display style to default
       this.displayStyle = this.getDisplayStyle();
 
@@ -122,6 +116,12 @@ export default {
         await this.getUsers();
         this.delayUpdateDisplayState('suggestion');
         this.searchBoxState = 'suggestion';
+
+        // scroll to top
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth',
+        })
       }
     },
     async submitHandler(value: string) {
@@ -168,6 +168,12 @@ export default {
 
         // set max width to display component
         this.displayStyle = this.getDisplayStyle();
+
+        // scroll to top
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth',
+        })
       }
     }
   },
