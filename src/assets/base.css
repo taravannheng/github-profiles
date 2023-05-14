@@ -61,7 +61,6 @@
 
 body {
   min-height: 100vh;
-  padding-bottom: 162px; /* set equivalent to the height of the search box component to prevent being cover on mobile */
   color: var(--color-text);
   background: #171717;
   transition: color 0.5s, background-color 0.5s;
@@ -72,15 +71,4 @@ body {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-@media only screen and (max-width: 768px) {
-  .container__search-box {
-    position: static !important;
-  }
-
-  body {
-    padding-bottom: 0 !important;
-  }
-      
 }
