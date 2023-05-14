@@ -57,7 +57,7 @@ export default {
         case 'error':
           return 'User not found';
         default:
-          return 'Enter username to get some public info of GitHub users';
+          return 'Enter username to get user info';
       }
     }
   },
