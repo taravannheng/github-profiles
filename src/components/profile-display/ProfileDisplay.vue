@@ -38,6 +38,7 @@ export default {
 
 .profile-display {
   padding-top: 36px;
+  padding-bottom: 36px;
   margin-left: 24px;
   margin-right: 24px;
 
