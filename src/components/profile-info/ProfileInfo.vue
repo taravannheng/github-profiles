@@ -1,7 +1,5 @@
 <template>
   <div class="profile-info" v-if="profileInfoData" :style="profileInfoStyle">
-    <small class="profile-info__username"><a
-        :href="profileInfoData.html_url" target="_blank">{{ profileInfoData.username }}</a></small>
     <div class="profile-info__follow">
       <small>{{ profileInfoData.followers }} Followers</small>
       <small class="follow__middle-dot">·</small>
@@ -34,17 +32,6 @@ export default {
   flex-direction: row;
   justify-content: center;
   align-items: center;
-
-  &__username {
-    color: map-get($colors, dark-primary);
-    font-size: map-get($font-sizes, body2);
-    font-weight: map-get($font-weights, body2);
-    text-decoration: underline;
-
-    & a {
-      color: inherit;
-    }
-  }
 
   &__follow {
     display: flex;
