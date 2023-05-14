@@ -92,6 +92,7 @@ export default {
 .search-box {
   width: clamp(100%, 100%, 100%);
   background-color: map-get($colors, darkest);
+  border-radius: 0;
   overflow: hidden;
 
   &__logo {
@@ -145,6 +146,7 @@ export default {
     height: clamp(56px, 56px, 56px);
     padding-left: 18px;
     border: 0;
+    border-radius: 0;
     margin-bottom: 4px;
     color: map-get($colors, light);
     background-color: map-get($colors, dark);
