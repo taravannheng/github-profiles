@@ -3,22 +3,38 @@ export interface SuggestionData {
   avatarUrl: string;
 }
 
-export interface ProfileDisplayData {
-  avatar_url: string;
-  html_url: string;
+export interface UserBasicData {
+  avatarUrl: string;
+  htmlUrl: string;
   username: string;
   followers: string;
   following: string;
   name: string;
   email: string;
-  latestRepoName: string;
-  latestRepoHTMLURL: string;
+}
+
+export interface LatestRepoBasicData {
+  name: string;
+  description: string;
+  htmlUrl: string;
+}
+
+export interface UserData {
+  avatarUrl: string;
+  htmlUrl: string;
+  username: string;
+  followers: string;
+  following: string;
+  name: string;
+  email: string;
+  latestRepoName: string | null;
+  latestRepoHtmlUrl: string;
   latestRepoDescription: string;
-  latestRepoLanguages: object;
-  latestRepoLatestCommit: string;
+  latestRepoLanguages: string;
+  latestCommit: string;
 }
 
 export interface AvatarContent {
-  avatar_url: string;
+  avatarUrl: string;
   username: string;
 }
