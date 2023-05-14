@@ -1,11 +1,9 @@
 <template>
-  <div class="progress-indicator"
-    :style="`${progressIndicatorStyle}`">
+  <div class="progress-indicator" :style="`${progressIndicatorStyle}`">
     <img src="../../assets/images/invertocat.png" alt="invertocat" class="progress-indicator__logo"
-      :class="{ 'rotate': isLoading }" :style="`${progressIndicatorLogoStyle}`">
+      :class="{ 'rotate': isRotating }" :style="`${progressIndicatorLogoStyle}`">
     <p class="progress-indicator__text-container" :style="`${progressIndicatorTextContainerStyle}`"><span
-        class="progress-indicator__text" :style="`${progressIndicatorTextStyle}`">{{ isLoading ? 'Searching...' : loadingText
-        }}</span></p>
+        class="progress-indicator__text" :style="`${progressIndicatorTextStyle}`">{{ progressIndicatorText }}</span></p>
   </div>
 </template>
 
@@ -29,15 +27,15 @@ export default {
       type: String,
       required: false
     },
-    loadingText: {
+    progressIndicatorText: {
       type: String,
       required: true
     },
-    isLoading: {
+    isRotating: {
       type: Boolean,
       required: false
-    }
-  },
+    },
+  }
 };
 </script>
 
@@ -78,5 +76,6 @@ export default {
       transform: rotate(360deg);
     }
   }
-}</style>
+}
+</style>
 
