@@ -1,7 +1,7 @@
 <template>
   <div class="avatar" :style="`${avatarStyle}`" v-if="avatarData">
     <img :src="`${avatarData.avatar_url}`" alt="profile picture" class="avatar__img" :style="`${avatarImgStyle}`" />
-    <small class="avatar__username"><a
+    <small class="avatar__username" :style="`${avatarUsernameStyle}`"><a
         :href="avatarData.html_url" target="_blank">{{ avatarData.username }}</a></small>
   </div>
 </template>
@@ -15,6 +15,10 @@ export default {
       required: false,
     },
     avatarImgStyle: {
+      type: String,
+      required: false,
+    },
+    avatarUsernameStyle: {
       type: String,
       required: false,
     },
