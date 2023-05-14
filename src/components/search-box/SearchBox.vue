@@ -44,7 +44,7 @@ export default {
     state: {
       type: String,
       validator: function (value: string) {
-        return ['default', 'suggestion', 'error'].includes(value);
+        return ['default', 'error'].includes(value);
       },
       default: 'default'
     },
@@ -52,8 +52,6 @@ export default {
   computed: {
     captionText() {
       switch (this.state) {
-        case 'suggestion':
-          return 'Searching...';
         case 'error':
           return 'User not found';
         default:

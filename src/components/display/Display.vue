@@ -1,14 +1,14 @@
 <template>
   <div class="display" :class="['state', state]">
     <div v-if="state === 'default'">
-      <ProgressIndicator loading-text="Start your search below..." />
+      <ProgressIndicator progress-indicator-text="Start your search below..."/>
     </div>
     <div v-if="state === 'loading'">
-      <ProgressIndicator loading-text="Start your search below..." is-loading />
+      <ProgressIndicator is-rotating progress-indicator-text="Loading..." />
     </div>
     <div v-if="state === 'suggestion'">
-      <Suggestion v-if="suggestionData" :suggestion-data="suggestionData" :clicked-card-content="clickedCardContent"
-        @update:clicked-card-content="clickHandler" />
+      <Suggestion v-if="suggestionData" :suggestion-data="suggestionData" :clicked-avatar-content="clickedAvatarContent"
+        @update:clicked-avatar-content="clickHandler" />
     </div>
     <div v-if="state === 'profile'">
       <ProfileDisplay v-if="profileDisplayData" :profile-display-data="profileDisplayData" />
@@ -48,14 +48,14 @@ export default {
   methods: {
     clickHandler(value: string) {
       if (this.state === 'suggestion') {
-        this.clickedCardContent = value;
-        this.$emit('update:clicked-card-content', this.clickedCardContent);
+        this.clickedAvatarContent = value;
+        this.$emit('update:clicked-avatar-content', this.clickedAvatarContent);
       }
     }
   },
   data() {
     return {
-      clickedCardContent: '' as string,
+      clickedAvatarContent: '' as string,
     }
   },
 };
