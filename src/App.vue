@@ -174,7 +174,7 @@ export default {
     <Display :state="displayState" :suggestion-data="suggestionData" :profile-display-data="profileDisplayData"
       :style="this.displayStyle" :clicked-card-content="clickedCardContent"
       @update:clicked-card-content="clickedCardHandler" class="container__display" />
-    <SearchBox :state="searchBoxState" search-box-style="margin: auto 0;" :is-searchbox-focus="isSearchBoxFocus"
+    <SearchBox :state="searchBoxState" :is-searchbox-focus="isSearchBoxFocus"
       @update:is-searchbox-focus="searchBoxFocusHandler" :search-value="searchValue" @update:search-value="searchHandler"
       :submit-value="submitValue" @update:submit-value="submitHandler" class="container__search-box" />
   </div>
@@ -183,6 +183,7 @@ export default {
 <style scoped lang="scss"> @import '@/assets/scss/main.scss';
 
  .container {
+   position: relative;
    display: flex;
    flex-direction: column;
    align-items: center;
@@ -206,10 +207,12 @@ export default {
    }
 
    &__search-box {
-     position: absolute;
+     position: fixed;
      bottom: 0;
      left: 0;
+    //  right: 24px;
      padding: 0 24px;
+     max-width: 1024px;
 
      @media only screen and (min-width: 640px) {
        padding: 0 40px;
