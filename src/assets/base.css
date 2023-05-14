@@ -61,6 +61,7 @@
 
 body {
   height: clamp(100vh, 100vh, 100vh);
+  padding-bottom: 162px; /* set equivalent to the height of the search box */
   overflow: hidden;
   color: var(--color-text);
   background: #171717;
