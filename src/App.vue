@@ -5,8 +5,8 @@ import Header from "./components/header/Header.vue";
 import Display from './components/display/Display.vue';
 import Card from "./components/card/Card.vue";
 import SearchBox from './components/search-box/SearchBox.vue';
-import { getUsers, getUserInfo, getLatestRepo, getRepoLanguages, getLatestCommit } from './github';
-import { type SuggestionData, type ProfileDisplayData, type AvatarContent } from "@/types";
+import { getUsers, getUserData } from './github';
+import { type SuggestionData, type AvatarContent, type UserData } from "@/types";
 
 export default {
   name: 'App',
@@ -25,11 +25,7 @@ export default {
       displayState: "default" as string,
       searchBoxState: "default" as string,
       suggestionData: [] as SuggestionData[] | null,
-      userInfo: {} as any,
-      userLatestRepo: {} as any,
-      userLatestRepoLanguages: {} as any,
-      userLatestCommit: {} as any,
-      profileDisplayData: {} as ProfileDisplayData,
+      profileDisplayData: {} as UserData,
     };
   },
   methods: {
@@ -57,30 +53,10 @@ export default {
       const users = await getUsers(this.searchValue);
       this.suggestionData = users;
     },
-    async getUserInfo() {
-      this.userInfo = await getUserInfo(this.submitValue);
-    },
-    async getLatestRepo() {
-      this.userLatestRepo = await getLatestRepo(this.submitValue);
-    },
-    async getRepoLanguages() {
-      const response = await getRepoLanguages(this.submitValue);
-      let languages = '';
+    async getProfileDisplayData() {
+      const userData = await getUserData(this.searchValue);
 
-      if (response) {
-        languages = Object.keys(response).join(" · ");
-      }
-
-      if (_.isEmpty(languages)) {
-        languages = 'N/A';
-      }
-
-      this.userLatestRepoLanguages = languages;
-    },
-    async getLatestCommit() {
-      const response = await getLatestCommit(this.submitValue);
-
-      this.userLatestCommit = response?.commit?.message ?? 'N/A';
+      this.profileDisplayData = userData;
     },
     async searchHandler(value: string) {
       this.searchValue = value;
@@ -122,26 +98,8 @@ export default {
       if (!_.isEmpty(value)) {
         this.displayState = 'loading';
 
-        await this.getUserInfo();
-        await this.getLatestRepo();
-        await this.getRepoLanguages();
-        await this.getLatestCommit();
-
-        this.profileDisplayData.avatar_url = this.userInfo.avatar_url;
-        this.profileDisplayData.html_url = this.userInfo.html_url;
-        this.profileDisplayData.username = this.userInfo.login;
-        this.profileDisplayData.followers = this.userInfo.followers;
-        this.profileDisplayData.following = this.userInfo.following;
-        this.profileDisplayData.name = this.userInfo?.name ?? 'N/A';
-        this.profileDisplayData.email = this.userInfo?.email ?? 'N/A';
-
-        this.profileDisplayData.latestRepoName = this.userLatestRepo?.name ?? null;
-        this.profileDisplayData.latestRepoHTMLURL = this.userLatestRepo?.html_url ?? 'N/A';
-        this.profileDisplayData.latestRepoDescription = this.userLatestRepo?.description ?? 'N/A';
-
-        this.profileDisplayData.latestRepoLanguages = this.userLatestRepoLanguages ?? 'N/A';
-
-        this.profileDisplayData.latestRepoLatestCommit = this.userLatestCommit ?? 'N/A';
+        // get user data
+        await this.getProfileDisplayData();
 
         // update the states for search box and display
         this.displayState = "profile";
