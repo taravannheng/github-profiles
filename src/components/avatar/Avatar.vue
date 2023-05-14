@@ -1,5 +1,5 @@
 <template>
-  <div class="avatar d-flex flex-row justify-content-center align-items-center" :style="`${avatarStyle}`" v-if="avatarData">
+  <div class="avatar" :style="`${avatarStyle}`" v-if="avatarData">
     <img :src="`${avatarData.avatar_url}`" alt="profile picture" class="avatar__img" :style="`${avatarImgStyle}`" />
   </div>
 </template>
@@ -28,6 +28,10 @@ export default {
 @import '@/assets/scss/main.scss';
 
 .avatar {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 
   &__img {
     width: 80px;

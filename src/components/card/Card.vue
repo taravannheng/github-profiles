@@ -1,6 +1,6 @@
 <template>
   <div class="card" :style="`${cardStyle}`" :class="['type-card', type]">
-    <p class="card__text d-flex flex-row align-items-center"
+    <p class="card__text"
       :style="`cursor: ${isClickable ? 'pointer;' : 'default;'} ${cardTextStyle}}`" @click="clickHandler"
       :class="['type-card__text', type]">{{ content }}
     </p>
@@ -68,6 +68,9 @@ export default {
   overflow-y: hidden;
 
   &__text {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
     width: clamp(100%, 100%, 100%);
     height: clamp(100%, 100%, 100%);
     padding-left: 18px;

@@ -2,7 +2,7 @@
   <div class="suggestion" :style="`${suggestionStyle}`">
     <h1 class="suggestion__title">Users</h1>
     <small class="suggestion__caption" v-if="suggestionData.length">Here's what we found...</small>
-    <div class="suggestion__card-container d-flex flex-column gap-1">
+    <div class="suggestion__card-container">
       <div class="suggestion__card" v-for="(item, index) in suggestionData" v-if="suggestionData" :key="index">
         <Card :content="item.login" is-clickable :clicked-card-content="clickedCardContent"
           @update:clicked-card-content="clickHandler" />
@@ -66,6 +66,9 @@ export default {
   }
 
   &__card-container {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
     margin-top: 24px;
   }
 

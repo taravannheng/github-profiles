@@ -1,5 +1,5 @@
 <template>
-  <header class="header d-flex justify-content-center align-items-center" :style="`${headerStyle}`">
+  <header class="header" :style="`${headerStyle}`">
     <h1 class="header__text" :style="`${headerTextStyle}`">{{ text }}</h1>
   </header>
 </template>
@@ -28,6 +28,9 @@ export default {
 @import '@/assets/scss/main.scss';
 
 .header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
   &__text {
     color: map-get($colors, dark-primary);

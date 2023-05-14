@@ -1,5 +1,5 @@
 <template>
-  <div class="progress-indicator d-flex justify-content-center align-items-center flex-column"
+  <div class="progress-indicator"
     :style="`${progressIndicatorStyle}`">
     <img src="../../assets/images/invertocat.png" alt="invertocat" class="progress-indicator__logo"
       :class="{ 'rotate': isLoading }" :style="`${progressIndicatorLogoStyle}`">
@@ -45,6 +45,11 @@ export default {
 @import '@/assets/scss/main.scss';
 
 .progress-indicator {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
   &__logo {
     height: clamp(64px, 64px, 64px);
     margin-bottom: 32px;
