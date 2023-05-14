@@ -11,7 +11,7 @@ const getUsers = async (username: string) => {
       let users = response.data.items.map((item: any) => {
         const user = {
           username: item.login,
-          avatar_url: item.avatar_url,
+          avatarUrl: item.avatar_url,
         };
         return user;
       });

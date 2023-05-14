@@ -1,6 +1,6 @@
 export interface SuggestionData {
   username: string;
-  avatar_url: string;
+  avatarUrl: string;
 }
 
 export interface ProfileDisplayData {
