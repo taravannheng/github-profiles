@@ -7,8 +7,8 @@
         <Avatar :avatar-data="item" is-clickable :clicked-avatar-content="clickedAvatarContent"
           @update:clicked-avatar-content="clickHandler" class="suggestion__avatar-content" avatar-img-style="margin-bottom: 8px;" />
       </div>
-      <div class="suggestion__avatar-empty" v-if="!suggestionData.length"><span class="card-empty__text"></span>We couldn't
-        find any users...</div>
+      <div class="suggestion__avatar-empty" v-if="!suggestionData.length"><span class="card-empty__text">We couldn't
+        find any users...</span></div>
     </div>
   </div>
 </template>
