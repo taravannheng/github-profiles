@@ -95,7 +95,7 @@ export default {
   }
 }
 
-.avatar-empty {
+.card-empty {
 
   &__text {
     color: map-get($colors, light);
