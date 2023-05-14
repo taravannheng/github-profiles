@@ -101,6 +101,12 @@ export default {
     async searchHandler(value: string) {
       this.searchValue = value;
 
+      // scroll to top
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth',
+      })
+
       // reset display style to default
       this.displayStyle = this.getDisplayStyle();
 
