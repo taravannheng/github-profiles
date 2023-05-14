@@ -189,9 +189,10 @@ export default {
    min-width: 100%;
    width: 100%;
    max-width: 1024px;
-   height: clamp(100vh, 100vh, 100vh);
+   height: clamp(cal(100vh - 56px), cal(100vh - 56px), cal(100vh - 56px));
    background-color: map-get($colors, darkest);
    padding: 0 24px;
+   overflow: hidden;
 
    @media only screen and (min-width: 640px) {
      padding: 0 40px;
@@ -207,7 +208,7 @@ export default {
 
    &__search-box {
      position: absolute;
-     bottom: 48px;
+     bottom: 56px;
      left: 0;
      padding: 0 24px;
 
