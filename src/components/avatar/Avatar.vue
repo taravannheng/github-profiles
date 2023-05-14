@@ -2,7 +2,7 @@
   <div class="avatar" v-if="avatarData" :style="`cursor: ${isClickable ? 'pointer;' : 'default;'} ${avatarStyle}}`" @click="clickHandler">
     <img :src="`${avatarData.avatarUrl}`" alt="profile picture" class="avatar__img" :style="`${avatarImgStyle}`" />
     <small v-if="!isClickable" class="avatar__username" :style="`${avatarUsernameStyle}`"><a
-        :href="avatarData.html_url" target="_blank">{{ avatarData.username }}</a></small>
+        :href="avatarData.htmlUrl" target="_blank">{{ avatarData.username }}</a></small>
     <small v-if="isClickable" class="avatar__username is-clickable" :style="`${avatarUsernameStyle}`">{{ avatarData.username }}</small>
   </div>
 </template>

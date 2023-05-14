@@ -4,7 +4,7 @@
     <div class="repo__body" v-if="repoData.latestRepoName">
       <div class="body__icon"><font-awesome-icon icon="book-bookmark" class="repo__icon" /></div>
       <div class="body__details">
-        <h2 class="details__repo-name"><a :href="`${repoData.latestRepoHTMLURL}`" target="_blank">{{
+        <h2 class="details__repo-name"><a :href="`${repoData.latestRepoHtmlUrl}`" target="_blank">{{
           repoData.latestRepoName }}</a></h2>
         <p class="details__repo-description">{{ repoData.latestRepoDescription }}</p>
         <div class="details__repo-language">
@@ -13,7 +13,7 @@
         </div>
         <div class="details__repo-commit">
           <h3 class="repo-commit__title">Latest Commit</h3>
-          <Card :content="repoData.latestRepoLatestCommit" style="max-height: 24px; padding: 14px 0; max-width: 300px; white-space: nowrap;" />
+          <Card :content="repoData.latestCommit" style="max-height: 24px; padding: 14px 0; max-width: 300px; white-space: nowrap;" />
         </div>
       </div>
     </div>
@@ -37,24 +37,6 @@ export default {
       type: Object,
       required: false,
     }
-  },
-  computed: {
-    getLanguagesLength() {
-      let length = 0;
-
-      if (this.repoData) {
-        length = Object.keys(this.repoData.latestRepoLanguages).length;
-      }
-
-
-      return length;
-    }
-  },
-  method: {
-    getLanguageText(obj: any): string {
-      const keys = Object.keys(obj);
-      return keys.join(" . ");
-    },
   },
   components: {
     Card,
