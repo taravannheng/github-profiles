@@ -61,21 +61,35 @@ export default {
     async searchHandler(value: string) {
       this.searchValue = value;
 
-      // update Display state to loading
-      this.displayState = 'loading'
+      if (_.isEmpty(value)) {
+        this.searchBoxState = "error";
 
-      // reset display style to default
-      this.displayStyle = this.getDisplayStyle();
+        if (this.displayState === 'suggestion') {
+          this.displayState = 'default';
+        }
 
-      if (_.isEmpty(value) || value == undefined) {
-        this.displayState = 'default';
-        this.searchBoxState = 'default';
+        setTimeout(() => {
+          this.searchBoxState = "default";
+        }, 1000);
       }
 
       if (!_.isEmpty(value)) {
-        await this.getUsers();
-        this.delayUpdateDisplayState('suggestion');
-        this.searchBoxState = 'suggestion';
+        // update Display state to loading
+      this.displayState = 'loading'
+
+// reset display style to default
+this.displayStyle = this.getDisplayStyle();
+
+if (_.isEmpty(value) || value == undefined) {
+  this.displayState = 'default';
+  this.searchBoxState = 'default';
+}
+
+if (!_.isEmpty(value)) {
+  await this.getUsers();
+  this.delayUpdateDisplayState('suggestion');
+  this.searchBoxState = 'suggestion';
+}
       }
 
       // scroll to top
@@ -125,8 +139,7 @@ export default {
     <Display :state="displayState" :suggestion-data="suggestionData" :profile-display-data="profileDisplayData"
       :style="this.displayStyle" @update:clicked-avatar-content="clickedAvatarHandler" class="container__display" />
     <SearchBox :state="searchBoxState" search-box-style="margin: auto 0;" :is-searchbox-focus="isSearchBoxFocus"
-      @update:is-searchbox-focus="searchBoxFocusHandler" :search-value="searchValue" @update:search-value="searchHandler"
-      :submit-value="submitValue" @update:submit-value="submitHandler" class="container__search-box" />
+      @update:is-searchbox-focus="searchBoxFocusHandler" :submit-value="submitValue" @update:submit-value="searchHandler" class="container__search-box" />
   </div>
 </template>
 
