@@ -229,7 +229,6 @@ export default {
      }
 
      @media only screen and (min-width: 1024px) {
-      bottom: 40px;
        padding: 0 80px;
      }
    }
