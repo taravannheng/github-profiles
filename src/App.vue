@@ -22,6 +22,11 @@ interface ProfileDisplayData {
   latestRepoLatestCommit: string;
 }
 
+interface AvatarContent {
+  avatar_url: string;
+  username: string;
+}
+
 
 export default {
   name: 'App',
@@ -48,8 +53,9 @@ export default {
     };
   },
   methods: {
-    clickedCardHandler(value: string) {
-      this.submitValue = value;
+    clickedAvatarHandler(value: AvatarContent) {
+      this.submitValue = value.username;
+      this.displayState = 'loading';
       this.submitHandler(this.submitValue);
     },
     getDisplayStyle() {
@@ -101,11 +107,11 @@ export default {
     async searchHandler(value: string) {
       this.searchValue = value;
 
-      // reset display style to default
-      this.displayStyle = this.getDisplayStyle();
-
       // update Display state to loading
       this.displayState = 'loading'
+
+      // reset display style to default
+      this.displayStyle = this.getDisplayStyle();
 
       if (_.isEmpty(value) || value == undefined) {
         this.displayState = 'default';
@@ -136,6 +142,8 @@ export default {
       }
 
       if (!_.isEmpty(value)) {
+        this.displayState = 'loading';
+
         // get user info
         await this.getUserInfo();
 
@@ -184,8 +192,7 @@ export default {
   <div class="container">
     <Header text="GitHub Profiles"></Header>
     <Display :state="displayState" :suggestion-data="suggestionData" :profile-display-data="profileDisplayData"
-      :style="this.displayStyle" :clicked-card-content="clickedCardContent"
-      @update:clicked-card-content="clickedCardHandler" class="container__display" />
+      :style="this.displayStyle" @update:clicked-avatar-content="clickedAvatarHandler" class="container__display" />
     <SearchBox :state="searchBoxState" search-box-style="margin: auto 0;" :is-searchbox-focus="isSearchBoxFocus"
       @update:is-searchbox-focus="searchBoxFocusHandler" :search-value="searchValue" @update:search-value="searchHandler"
       :submit-value="submitValue" @update:submit-value="submitHandler" class="container__search-box" />
