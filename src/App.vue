@@ -122,13 +122,13 @@ export default {
         await this.getUsers();
         this.delayUpdateDisplayState('suggestion');
         this.searchBoxState = 'suggestion';
+      }
 
-        // scroll to top
-        window.scrollTo({
+      // scroll to top
+      window.scrollTo({
           top: 0,
           behavior: 'smooth',
         })
-      }
     },
     async submitHandler(value: string) {
       this.submitValue = value;
