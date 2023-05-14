@@ -207,7 +207,7 @@ export default {
 
    &__search-box {
      position: absolute;
-     bottom: 0;
+     bottom: 48px;
      left: 0;
      padding: 0 24px;
 
