@@ -41,6 +41,9 @@ export default {
   margin-left: 24px;
   margin-right: 24px;
 
+  @media only screen and (max-width: 768px) {
+    padding-bottom: 96px;
+  }
 }
 </style>
 
