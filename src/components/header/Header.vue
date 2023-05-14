@@ -31,8 +31,8 @@ export default {
 
   &__text {
     color: map-get($colors, dark-primary);
-    font-size: map-get($font-sizes, h2);
-    font-weight: map-get($font-weights, h2);
+    font-size: map-get($font-sizes, h3);
+    font-weight: map-get($font-weights, h3);
     padding-top: 52px;
 
     @media only screen and (min-width: 640px) {
