@@ -75,28 +75,28 @@ export default {
 
       if (!_.isEmpty(value)) {
         // update Display state to loading
-      this.displayState = 'loading'
+        this.displayState = 'loading'
 
-// reset display style to default
-this.displayStyle = this.getDisplayStyle();
+        // reset display style to default
+        this.displayStyle = this.getDisplayStyle();
 
-if (_.isEmpty(value) || value == undefined) {
-  this.displayState = 'default';
-  this.searchBoxState = 'default';
-}
+        if (_.isEmpty(value) || value == undefined) {
+          this.displayState = 'default';
+          this.searchBoxState = 'default';
+        }
 
-if (!_.isEmpty(value)) {
-  await this.getUsers();
-  this.delayUpdateDisplayState('suggestion');
-  this.searchBoxState = 'suggestion';
-}
+        if (!_.isEmpty(value)) {
+          await this.getUsers();
+          this.delayUpdateDisplayState('suggestion');
+          this.searchBoxState = 'suggestion';
+        }
       }
 
       // scroll to top
       window.scrollTo({
-          top: 0,
-          behavior: 'smooth',
-        })
+        top: 0,
+        behavior: 'smooth',
+      })
     },
     async submitHandler(value: string) {
       this.submitValue = value;
@@ -121,13 +121,13 @@ if (!_.isEmpty(value)) {
 
         // set max width to display component
         this.displayStyle = this.getDisplayStyle();
-
-        // scroll to top
-        window.scrollTo({
-          top: -100,
-          behavior: 'smooth',
-        })
       }
+
+      // scroll to top
+      window.scrollTo({
+        top: -100,
+        behavior: 'smooth',
+      })
     }
   },
 };
@@ -139,7 +139,8 @@ if (!_.isEmpty(value)) {
     <Display :state="displayState" :suggestion-data="suggestionData" :profile-display-data="profileDisplayData"
       :style="this.displayStyle" @update:clicked-avatar-content="clickedAvatarHandler" class="container__display" />
     <SearchBox :state="searchBoxState" search-box-style="margin: auto 0;" :is-searchbox-focus="isSearchBoxFocus"
-      @update:is-searchbox-focus="searchBoxFocusHandler" :submit-value="submitValue" @update:submit-value="searchHandler" class="container__search-box" />
+      @update:is-searchbox-focus="searchBoxFocusHandler" :submit-value="submitValue" @update:submit-value="searchHandler"
+      class="container__search-box" />
   </div>
 </template>
 
