@@ -56,6 +56,9 @@ export default {
   width: clamp(100%, 100%, 100%);
   height: clamp(56px, 56px, 56px);
   margin: 0;
+  border-top: 0;
+  border-right: 0;
+  border-bottom: 0;
   border-left-width: 4px;
   border-left-color: map-get($colors, dark-primary);
   border-radius: 0;
@@ -82,7 +85,7 @@ export default {
   transition: background-color 0.3s linear;
 
   &.default {
-    background-color: map-get($colors, light-primary);
+    background-color: map-get($colors, medium-primary);
   }
 
   &.error {
