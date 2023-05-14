@@ -24,8 +24,6 @@ Technologies used for this project:
 
 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" height="16" width="16" /> &nbsp; &nbsp; TypeScript
 
-<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg" height="16" width="16" /> &nbsp; &nbsp; Bootstrap
-
 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sass/sass-original.svg" height="16" width="16" /> &nbsp; &nbsp; Sass
 
 #### Formatting and Linting
