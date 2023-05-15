@@ -59,8 +59,7 @@ export default {
   border-top: 0;
   border-right: 0;
   border-bottom: 0;
-  border-left-width: 4px;
-  border-left-color: map-get($colors, dark-primary);
+  border-left: 4px solid map-get($colors, dark-primary);
   border-radius: 0;
   background-color: map-get($colors, medium-primary);
   color: map-get($colors, lightest);
