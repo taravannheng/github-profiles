@@ -20,12 +20,12 @@ export default {
     return {
       isSearchBoxFocus: false,
       displayStyle: 'max-width: 100%;' as string,
-      searchValue: '' as string,
       submitValue: '' as string,
       displayState: "default" as string,
       searchBoxState: "default" as string,
       suggestionData: [] as SuggestionData[] | null,
       profileDisplayData: {} as UserData,
+      clickedAvatarContent: {} as AvatarContent,
     };
   },
   methods: {
@@ -50,16 +50,16 @@ export default {
       }
     },
     async getUsers() {
-      const users = await getUsers(this.searchValue);
+      const users = await getUsers(this.submitValue);
       this.suggestionData = users;
     },
     async getProfileDisplayData() {
-      const userData = await getUserData(this.searchValue);
+      const userData = await getUserData(this.submitValue);
 
       this.profileDisplayData = userData;
     },
     async searchHandler(value: string) {
-      this.searchValue = value;
+      this.submitValue = value;
 
       if (_.isEmpty(value)) {
         this.searchBoxState = "error";
@@ -137,7 +137,8 @@ export default {
   <div class="container">
     <Header text="GitHub Profiles"></Header>
     <Display :state="displayState" :suggestion-data="suggestionData" :profile-display-data="profileDisplayData"
-      :style="this.displayStyle" @update:clicked-avatar-content="clickedAvatarHandler" class="container__display" />
+      :style="this.displayStyle" @update:clicked-avatar-content="clickedAvatarHandler"
+      :clicked-avatar-content="clickedAvatarContent" class="container__display" />
     <SearchBox :state="searchBoxState" search-box-style="margin: auto 0;" :is-searchbox-focus="isSearchBoxFocus"
       @update:is-searchbox-focus="searchBoxFocusHandler" :submit-value="submitValue" @update:submit-value="searchHandler"
       class="container__search-box" />
