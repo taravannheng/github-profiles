@@ -1,11 +1,11 @@
 <template>
   <div class="search-box" :style="`${searchBoxStyle}`">
     <img src="../../assets/images/github.png" alt="github logo" class="search-box__logo" :style="`${searchBoxLogoStyle}`">
-    <form class="search-box__form" @submit.prevent :class="['state-search-box__form', state]">
+    <form class="search-box__form" @submit.prevent="submitHandler" :class="['state-search-box__form', state]">
       <div class="search-box__field-container">
         <input @focus="focusHandler" @blur="blurHandler" v-model="searchValue" type="text" class="search-box__field"
           :style="`${searchBoxFieldStyle}`" placeholder="username" :class="['state-search-box__field', state]" />
-        <button type="button" @click="submitHandler" class="search-box__button" :class="['state-search-box__button', state]"
+        <button type="submit" @click="submitHandler" class="search-box__button" :class="['state-search-box__button', state]"
           :style="`${searchBoxButtonStyle}`">Search</button>
         <p class="search-box__caption" :style="`${searchBoxCaptionStyle}`" :class="['state-search-box__caption', state]">
           {{ captionText }}</p>
@@ -69,6 +69,8 @@ export default {
       this.$emit('update:is-searchbox-focus', true);
     },
     blurHandler() {
+      this.$emit('update:is-searchbox-focus', false);
+
       window.scrollTo({
         top: 0,
         behavior: 'smooth'
@@ -77,9 +79,9 @@ export default {
     submitHandler() {
       this.$emit('update:submit-value', this.searchValue);
 
-      if (!_.isEmpty(this.searchValue)) {
-        this.searchValue = '';
-      }
+      // if (!_.isEmpty(this.searchValue)) {
+      //   this.searchValue = '';
+      // }
     }
   }
 };
