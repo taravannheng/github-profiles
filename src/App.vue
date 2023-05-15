@@ -48,6 +48,10 @@ export default {
         this.displayState = 'default';
         this.displayStyle = this.getDisplayStyle();
       }
+
+      if (!this.isSearchBoxFocus) {
+        this.searchBoxState = 'default';
+      }
     },
     async getUsers() {
       const users = await getUsers(this.submitValue);
@@ -73,22 +77,22 @@ export default {
         }, 1000);
       }
 
-      if (!_.isEmpty(value)) {
+      if (!_.isEmpty(this.submitValue)) {
         // update Display state to loading
         this.displayState = 'loading'
 
         // reset display style to default
         this.displayStyle = this.getDisplayStyle();
 
-        if (_.isEmpty(value) || value == undefined) {
+        if (_.isEmpty(this.submitValue) || this.submitValue == undefined) {
           this.displayState = 'default';
           this.searchBoxState = 'default';
         }
 
-        if (!_.isEmpty(value)) {
+        if (!_.isEmpty(this.submitValue)) {
           await this.getUsers();
           this.delayUpdateDisplayState('suggestion');
-          this.searchBoxState = 'suggestion';
+          this.searchBoxState = 'default';
         }
       }
 
