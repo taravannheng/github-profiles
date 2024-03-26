@@ -34,6 +34,7 @@ export default {
       required: true,
     },
   },
+  emits: ['update:clicked-avatar-content'],
   methods: {
     clickHandler(value: string) {
       this.clickedAvatarContent = value;

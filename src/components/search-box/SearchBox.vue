@@ -49,6 +49,7 @@ export default {
       default: 'default'
     },
   },
+  emits: ['update:is-searchbox-focus', 'update:is-searchbox-focus', 'update:submit-value'],
   computed: {
     captionText() {
       switch (this.state) {
