@@ -32,6 +32,7 @@ export default {
       required: false,
     },
   },
+  emits: ['update:clicked-avatar-content'],
   methods: {
     clickHandler() {
       if (this.isClickable) {
