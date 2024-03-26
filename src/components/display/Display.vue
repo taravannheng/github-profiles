@@ -45,6 +45,7 @@ export default {
       required: false,
     },
   },
+  emits: ['update:clicked-avatar-content'],
   methods: {
     clickHandler(value: string) {
       if (this.state === 'suggestion') {
