@@ -90,8 +90,14 @@ export default {
         }
 
         if (!_.isEmpty(this.submitValue)) {
-          await this.getUsers();
-          this.delayUpdateDisplayState('suggestion');
+          const users = await this.getUsers();
+
+          if (users === undefined) {
+            this.delayUpdateDisplayState('error');
+          } else {
+            this.delayUpdateDisplayState('suggestion');
+          }
+
           this.searchBoxState = 'default';
         }
       }

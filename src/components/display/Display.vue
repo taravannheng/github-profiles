@@ -3,6 +3,9 @@
     <div v-if="state === 'default'">
       <ProgressIndicator progress-indicator-text="Start your search below..."/>
     </div>
+    <div v-if="state === 'error'">
+      <ProgressIndicator progress-indicator-text="An error has occured, please try again later..."/>
+    </div>
     <div v-if="state === 'loading'">
       <ProgressIndicator is-rotating progress-indicator-text="Loading..." />
     </div>
@@ -32,7 +35,7 @@ export default {
     state: {
       type: String,
       validator: function (value: string) {
-        return ['default', 'loading', 'suggestion', 'profile'].includes(value);
+        return ['default', 'loading', 'suggestion', 'profile', 'error'].includes(value);
       },
       default: 'default'
     },
@@ -77,6 +80,7 @@ export default {
 }
 
 .state.default,
+.state.error,
 .state.loading {
   display: flex;
   justify-content: center;
