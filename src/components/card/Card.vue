@@ -36,6 +36,7 @@ export default {
       default: 'default'
     }
   },
+  emits: ['update:clicked-card-content'],
   methods: {
     clickHandler() {
       if (this.isClickable) {
